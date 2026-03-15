@@ -8,12 +8,18 @@ Umi is currently in an early bootstrap phase. This repository intentionally star
 
 - ✅ Repository initialized
 - ✅ Baseline documentation added
-- ⏳ Application code not scaffolded yet
+- ✅ Minimal bootstrap CLI scaffolded (`python umi.py`)
 - ⏳ CI/testing pipeline not configured yet
 
 ## Getting Started
 
-Because the runtime stack is not selected yet, there are no build or run commands today.
+The runtime stack is still being evaluated, but a minimal Python CLI bootstrap is available now.
+
+Run:
+
+```bash
+python umi.py
+```
 
 If you're joining as a new contributor:
 
@@ -28,6 +34,9 @@ If you're joining as a new contributor:
 .
 ├── README.md
 ├── CONTRIBUTING.md
+├── umi.py
+├── tests/
+│   └── test_umi.py
 └── docs/
     └── architecture.md
 ```
