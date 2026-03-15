@@ -27,6 +27,18 @@ def test_cli_help_flag_displays_usage() -> None:
     assert "Run the Umi bootstrap smoke command." in result.stdout
 
 
+def test_cli_does_not_accept_abbreviated_flags() -> None:
+    result = subprocess.run(
+        [sys.executable, "umi.py", "--hel"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "unrecognized arguments: --hel" in result.stderr
+
+
 def test_cli_rejects_unknown_arguments() -> None:
     result = subprocess.run(
         [sys.executable, "umi.py", "--unknown"],

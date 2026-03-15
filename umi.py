@@ -10,6 +10,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="umi",
         description="Run the Umi bootstrap smoke command.",
+        allow_abbrev=False,
     )
     return parser
 
