@@ -17,7 +17,10 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     """Run a minimal bootstrap command for contributors."""
     parser = build_parser()
-    parser.parse_args(argv)
+    try:
+        parser.parse_args(argv)
+    except SystemExit as exc:
+        return int(exc.code) if isinstance(exc.code, int) else 1
     print("Umi bootstrap is working.")
     return 0
 

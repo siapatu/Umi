@@ -37,3 +37,35 @@ def test_cli_rejects_unknown_arguments() -> None:
 
     assert result.returncode == 2
     assert "unrecognized arguments: --unknown" in result.stderr
+
+
+def test_main_returns_zero_for_help_without_raising() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import umi; raise SystemExit(umi.main(['--help']))",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "usage:" in result.stdout
+
+
+def test_main_returns_two_for_unknown_args_without_raising() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import umi; raise SystemExit(umi.main(['--unknown']))",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "unrecognized arguments: --unknown" in result.stderr
