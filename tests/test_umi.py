@@ -37,3 +37,28 @@ def test_cli_rejects_unknown_arguments() -> None:
 
     assert result.returncode == 2
     assert "unrecognized arguments: --unknown" in result.stderr
+
+
+def _load_main():
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location("umi_module", Path("umi.py"))
+    assert spec is not None
+    assert spec.loader is not None
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.main
+
+
+def test_main_returns_exit_code_for_parse_errors() -> None:
+    main = _load_main()
+
+    assert main(["--unknown"]) == 2
+
+
+def test_main_returns_exit_code_for_help() -> None:
+    main = _load_main()
+
+    assert main(["--help"]) == 0
