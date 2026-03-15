@@ -1,43 +1,43 @@
 # Codebase Review: Proposed Tasks
 
-Given the current repository is in bootstrap mode, here are four concrete, prioritized tasks that map to the requested categories.
+After reviewing the current bootstrap codebase, here are four targeted tasks (one per requested category).
 
 ## 1) Typo fix task
-**Task:** Clean up README text formatting typo/noise.
+**Task:** Replace `entrypoint` with `entry point` in the top-level module docstring.
 
-- **Issue found:** The README body currently has a trailing space (`"Bismillah "`).
-- **Why this matters:** Tiny formatting defects create noisy diffs and look unpolished.
-- **Suggested fix:** Remove trailing whitespace and normalize markdown formatting.
+- **Issue found:** `umi.py` currently uses `"Umi bootstrap CLI entrypoint."`.
+- **Why this matters:** Minor wording/typo issues in user-facing or maintainer-facing text reduce polish and consistency.
+- **Suggested fix:** Update wording to `"Umi bootstrap CLI entry point."` (or standardize on one style across docs).
 - **Acceptance criteria:**
-  - No trailing whitespace in `README.md`.
-  - `git diff --check` returns clean.
+  - The module docstring uses the agreed spelling/style consistently.
+  - Any matching wording in docs is aligned.
 
 ## 2) Bug fix task
-**Task:** Keep the bootstrap CLI runnable as the codebase evolves.
+**Task:** Preserve non-integer `SystemExit` semantics in `main()`.
 
-- **Issue found:** If the minimal runnable entrypoint is removed or broken, contributors lose the only smoke path.
-- **Why this matters:** A guaranteed run command prevents the repo from regressing into a non-runnable state.
-- **Suggested fix:** Retain and validate a minimal executable command (`python umi.py`) and keep docs in sync.
+- **Issue found:** `main()` catches `SystemExit` and coerces all non-integer exit codes to `1`.
+- **Why this matters:** If future CLI paths call `parser.exit(message=...)` or otherwise raise `SystemExit` with a string/object code, the current behavior drops that semantic information and always returns `1`.
+- **Suggested fix:** Handle `None` as `0`, preserve integer codes, and consider surfacing message-like exit payloads predictably.
 - **Acceptance criteria:**
-  - The documented command `python umi.py` exists and exits successfully.
-  - A smoke test verifies this behavior on a fresh clone.
+  - `main()` preserves expected exit behavior for integer, `None`, and message-like `SystemExit.code` values.
+  - Regression tests cover these cases.
 
-## 3) Documentation discrepancy task
-**Task:** Align README with actual repository contents and intended scope.
+## 3) Comment/documentation discrepancy task
+**Task:** Reconcile project-status messaging in `README.md` with the actual repository state.
 
-- **Issue found:** README currently has only a title and a short phrase, which does not describe purpose, usage, or architecture.
-- **Why this matters:** Documentation currently implies a project exists, but provides no actionable guidance.
-- **Suggested fix:** Expand README sections: project purpose, setup, usage, development workflow, and roadmap.
+- **Issue found:** README says the CI/testing pipeline is not configured yet, while the repo already contains executable tests (`tests/test_umi.py`).
+- **Why this matters:** New contributors can be misled about current maturity and available validation steps.
+- **Suggested fix:** Reword status to distinguish between "tests exist" and "CI not yet configured".
 - **Acceptance criteria:**
-  - README includes: Overview, Getting Started, Usage, and Contributing sections.
-  - Instructions are validated by a clean-room run-through.
+  - README status section accurately reflects current test availability.
+  - Getting Started includes the current local test command.
 
 ## 4) Test improvement task
-**Task:** Introduce baseline CI checks for content and style quality.
+**Task:** Make CLI subprocess tests robust to invocation directory.
 
-- **Issue found:** No tests/checks currently exist.
-- **Why this matters:** Regressions in docs/config quality will go unnoticed.
-- **Suggested fix:** Add lightweight checks such as markdown linting and/or a smoke test in CI.
+- **Issue found:** Tests invoke `python umi.py` via a relative script path, which can fail when pytest is run from a different working directory.
+- **Why this matters:** Test reliability should not depend on where pytest is launched.
+- **Suggested fix:** Resolve script path via `Path(__file__).resolve().parents[1] / "umi.py"` (or invoke module form where appropriate).
 - **Acceptance criteria:**
-  - CI workflow runs on pull requests.
-  - At least one automated check verifies repository health (e.g., markdown lint, formatting, or smoke command).
+  - Tests pass when invoked from repo root and from another cwd.
+  - No hardcoded relative-path assumption remains in CLI subprocess tests.
