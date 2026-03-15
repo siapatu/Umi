@@ -1,6 +1,6 @@
 # Codebase Review: Proposed Tasks
 
-Given the current repository only contains a minimal `README.md`, here are four concrete, prioritized tasks that map to the requested categories.
+Given the current repository is in bootstrap mode, here are four concrete, prioritized tasks that map to the requested categories.
 
 ## 1) Typo fix task
 **Task:** Clean up README text formatting typo/noise.
@@ -13,14 +13,14 @@ Given the current repository only contains a minimal `README.md`, here are four 
   - `git diff --check` returns clean.
 
 ## 2) Bug fix task
-**Task:** Add a basic runnable entrypoint to prevent "project cannot run" failure.
+**Task:** Keep the bootstrap CLI runnable as the codebase evolves.
 
-- **Issue found:** There is no executable code path, so contributors/users cannot run or validate anything.
-- **Why this matters:** For practical use, a repository that cannot run is functionally broken.
-- **Suggested fix:** Add a minimal application skeleton (language/tooling of choice) with one executable command.
+- **Issue found:** If the minimal runnable entrypoint is removed or broken, contributors lose the only smoke path.
+- **Why this matters:** A guaranteed run command prevents the repo from regressing into a non-runnable state.
+- **Suggested fix:** Retain and validate a minimal executable command (`python umi.py`) and keep docs in sync.
 - **Acceptance criteria:**
-  - A documented run command exists (e.g., `npm start`, `python -m ...`, etc.).
-  - Command exits successfully on a fresh clone.
+  - The documented command `python umi.py` exists and exits successfully.
+  - A smoke test verifies this behavior on a fresh clone.
 
 ## 3) Documentation discrepancy task
 **Task:** Align README with actual repository contents and intended scope.
