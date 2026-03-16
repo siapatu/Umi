@@ -40,7 +40,3 @@ def main(argv: Sequence[str] | None = None) -> int:
         return int(exc.code) if isinstance(exc.code, int) else 1
     print("Umi bootstrap is working.")
     return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
