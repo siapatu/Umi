@@ -9,7 +9,8 @@ Umi is currently in an early bootstrap phase. This repository intentionally star
 - ✅ Repository initialized
 - ✅ Baseline documentation added
 - ✅ Minimal bootstrap CLI scaffolded (`python umi.py`)
-- ⏳ CI/testing pipeline not configured yet
+- ✅ Local pytest suite added (`pytest -q`)
+- ⏳ CI pipeline not configured yet
 
 ## Getting Started
 
@@ -19,6 +20,12 @@ Run:
 
 ```bash
 python umi.py
+```
+
+Run tests:
+
+```bash
+pytest -q
 ```
 
 If you're joining as a new contributor:
