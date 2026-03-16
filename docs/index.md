@@ -5,13 +5,20 @@ title: Umi Documentation
 
 # Umi Documentation
 
-Welcome to the Umi docs site.
+Welcome to the Umi project documentation.
 
-## Start here
+## Guides
 
 - [Architecture Notes](architecture.md)
 - [Contributing Guide](../CONTRIBUTING.md)
+- [Security Policy](../SECURITY.md)
 
-## Local preview
+## GitHub Pages
 
-You can preview docs using any Markdown renderer, or GitHub's built-in preview in pull requests.
+This site is deployed from the `docs/` folder using GitHub Actions.
+
+If you're forking this project:
+
+1. Enable Pages in repository settings (source: **GitHub Actions**).
+2. Keep `docs/` as the published artifact path.
+3. Update links and project naming as needed.
