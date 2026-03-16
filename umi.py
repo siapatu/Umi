@@ -21,6 +21,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         parser.parse_args(argv)
     except SystemExit as exc:
+        if exc.code is None:
+            return 0
         return int(exc.code) if isinstance(exc.code, int) else 1
     print("Umi bootstrap is working.")
     return 0
