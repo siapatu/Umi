@@ -132,3 +132,35 @@ def test_main_rejects_unknown_args_when_program_name_is_present() -> None:
 
     assert result.returncode == 2
     assert "unrecognized arguments: --unknown" in result.stderr
+
+
+def test_main_accepts_argv_with_program_path() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import umi; raise SystemExit(umi.main(['/workspace/Umi/umi.py', '--help']))",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "usage:" in result.stdout
+
+
+def test_main_accepts_windows_style_program_path() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            r"import umi; raise SystemExit(umi.main([r'C:\\repo\\umi.py', '--help']))",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "usage:" in result.stdout
