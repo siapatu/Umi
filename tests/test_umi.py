@@ -81,3 +81,22 @@ def test_main_returns_two_for_unknown_args_without_raising() -> None:
 
     assert result.returncode == 2
     assert "unrecognized arguments: --unknown" in result.stderr
+
+
+def test_main_handles_systemexit_with_none_code() -> None:
+    import pathlib
+    import sys
+
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+    import umi
+
+    class DummyParser:
+        def parse_args(self, argv: list[str] | None) -> None:
+            raise SystemExit(None)
+
+    original = umi.build_parser
+    try:
+        umi.build_parser = lambda: DummyParser()
+        assert umi.main([]) == 0
+    finally:
+        umi.build_parser = original
