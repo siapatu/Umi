@@ -1,32 +1,50 @@
 # Contributing to Umi
 
-Thanks for contributing.
+Thanks for your interest in improving Umi.
 
-## Ground Rules
+## Ways to contribute
 
-- Keep pull requests focused and reasonably small.
-- Include context in commit messages and PR descriptions.
-- Update documentation when behavior or structure changes.
+- Report bugs via GitHub issues
+- Propose and discuss enhancements
+- Improve documentation and examples
+- Submit code fixes and tests
 
-## Development Workflow (Current)
+## Development setup
 
-Since the project stack is not selected yet:
+```bash
+git clone https://github.com/OWNER/REPO.git
+cd REPO
+python -m pip install --upgrade pip pytest
+```
 
-1. Open an issue for substantial proposals.
-2. Align on stack/structure before adding large amounts of code.
-3. Land foundational changes incrementally.
+Run checks locally:
 
-## Pull Request Checklist
+```bash
+PYTHONPATH=src pytest -q
+```
 
-- [ ] Change is scoped and understandable.
-- [ ] Docs updated where appropriate.
-- [ ] Follow-up work captured as issues/TODOs.
+## Branch and PR workflow
 
-## Code Style
+1. Create a feature branch from `main`.
+2. Keep commits focused and descriptive.
+3. Update tests/docs for behavior changes.
+4. Open a pull request using the provided PR template.
 
-A formal lint/format setup will be introduced with the selected stack.
-Until then:
+## Commit message guidance
 
-- Prefer readability over cleverness.
-- Use clear naming.
-- Keep files and functions focused.
+Use clear, imperative subject lines:
+
+- `docs: improve quickstart instructions`
+- `test: add CLI unknown argument coverage`
+- `feat: add new command scaffold`
+
+## Pull request checklist
+
+- [ ] Change is scoped and understandable
+- [ ] Tests updated/added where appropriate
+- [ ] Documentation updated for user-facing changes
+- [ ] CI passes
+
+## Community expectations
+
+By participating, you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).

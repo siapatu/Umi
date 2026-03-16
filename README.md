@@ -1,29 +1,40 @@
 # Umi
 
-Umi is a lightweight Python CLI starter project designed to be easy to fork, extend, and publish as an open-source repository.
+A lightweight, production-friendly Python CLI starter template for open-source projects.
 
-## ✨ Highlights
+[![CI](https://img.shields.io/github/actions/workflow/status/OWNER/REPO/ci.yml?branch=main&label=ci)](https://github.com/OWNER/REPO/actions/workflows/ci.yml)
+[![Pages](https://img.shields.io/github/actions/workflow/status/OWNER/REPO/pages.yml?branch=main&label=pages)](https://github.com/OWNER/REPO/actions/workflows/pages.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-- Clean Python package layout under `src/`
-- CLI entrypoint available as:
-  - `python umi.py` (repository script)
-  - `python -m umi` (package module)
-- Basic pytest suite for smoke and argument behavior
-- Documentation site content in `docs/` ready for GitHub Pages
-- CI and Pages workflows prepared under `.github/workflows/`
+> Replace `OWNER/REPO` badge links after forking this template.
 
-## 📦 Project Structure
+## Why this template?
+
+Umi gives you a clean foundation for a serious open-source project:
+
+- ✅ `src/` layout with module entrypoint
+- ✅ test suite with `pytest`
+- ✅ CI workflow for pull requests and pushes
+- ✅ GitHub Pages deployment workflow for docs
+- ✅ contribution, security, and community health docs
+
+## Project structure
 
 ```text
 .
 ├── .github/
-│   └── workflows/
-│       ├── ci.yml
-│       └── pages.yml
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   ├── config.yml
+│   │   └── feature_request.md
+│   ├── workflows/
+│   │   ├── ci.yml
+│   │   └── pages.yml
+│   └── pull_request_template.md
 ├── docs/
+│   ├── _config.yml
 │   ├── architecture.md
-│   ├── index.md
-│   └── _config.yml
+│   └── index.md
 ├── src/
 │   └── umi/
 │       ├── __init__.py
@@ -32,19 +43,27 @@ Umi is a lightweight Python CLI starter project designed to be easy to fork, ext
 ├── tests/
 │   └── test_umi.py
 ├── .gitignore
+├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── LICENSE
-├── README.md
+├── SECURITY.md
+├── pyproject.toml
 └── umi.py
 ```
 
-## 🚀 Quick Start
+## Quick start
 
 ### Requirements
 
 - Python 3.10+
 
-### Run locally
+### Install dependencies
+
+```bash
+python -m pip install --upgrade pip pytest
+```
+
+### Run the CLI
 
 ```bash
 python umi.py
@@ -62,18 +81,29 @@ PYTHONPATH=src python -m umi
 PYTHONPATH=src pytest -q
 ```
 
-## 📚 Documentation & GitHub Pages
+## Documentation and GitHub Pages
 
-This repository is configured to publish `docs/` with a GitHub Pages workflow.
+The repository is configured to deploy the `docs/` directory to GitHub Pages using GitHub Actions.
 
-1. Push to GitHub.
-2. In repository settings, ensure **Pages** is set to **GitHub Actions** as source.
-3. The `pages.yml` workflow will deploy on pushes to `main` (and is runnable manually).
+1. Push this repository to GitHub.
+2. Go to **Settings → Pages**.
+3. Set **Build and deployment / Source** to **GitHub Actions**.
+4. Push to `main` (or run the workflow manually) to publish docs.
 
-## 🤝 Contributing
+## Open-source defaults included
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening pull requests.
+- [MIT License](LICENSE)
+- [Contributing guide](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Security policy](SECURITY.md)
+- [Issue and PR templates](.github)
 
-## 📄 License
+## Roadmap
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+- Add packaging/publishing workflow to PyPI
+- Add linting (`ruff`) and type-checking
+- Expand docs with usage examples
+
+## License
+
+Licensed under the MIT License. See [LICENSE](LICENSE).
