@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Sequence
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -15,11 +16,22 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
+def _normalize_argv(argv: Sequence[str] | None) -> list[str] | None:
+    """Normalize argv for callers that accidentally include the program name."""
+    if argv is None:
+        return None
+
+    normalized = list(argv)
+    if normalized and normalized[0] in {"umi", "umi.py"}:
+        return normalized[1:]
+    return normalized
+
+
+def main(argv: Sequence[str] | None = None) -> int:
     """Run a minimal bootstrap command for contributors."""
     parser = build_parser()
     try:
-        parser.parse_args(argv)
+        parser.parse_args(_normalize_argv(argv))
     except SystemExit as exc:
         if exc.code is None:
             return 0

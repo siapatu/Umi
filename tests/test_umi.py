@@ -100,3 +100,35 @@ def test_main_handles_systemexit_with_none_code() -> None:
         assert umi.main([]) == 0
     finally:
         umi.build_parser = original
+
+
+def test_main_accepts_argv_with_program_name() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import umi; raise SystemExit(umi.main(['umi.py', '--help']))",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "usage:" in result.stdout
+
+
+def test_main_rejects_unknown_args_when_program_name_is_present() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import umi; raise SystemExit(umi.main(['umi', '--unknown']))",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "unrecognized arguments: --unknown" in result.stderr
