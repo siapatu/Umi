@@ -1,67 +1,79 @@
 # Umi
 
-_Bismillah._
+Umi is a lightweight Python CLI starter project designed to be easy to fork, extend, and publish as an open-source repository.
 
-Umi is currently in an early bootstrap phase. This repository intentionally starts small so the project direction, architecture, and contribution practices can be defined clearly from the beginning.
+## ✨ Highlights
 
-## Current Status
+- Clean Python package layout under `src/`
+- CLI entrypoint available as:
+  - `python umi.py` (repository script)
+  - `python -m umi` (package module)
+- Basic pytest suite for smoke and argument behavior
+- Documentation site content in `docs/` ready for GitHub Pages
+- CI and Pages workflows prepared under `.github/workflows/`
 
-- ✅ Repository initialized
-- ✅ Baseline documentation added
-- ✅ Minimal bootstrap CLI scaffolded (`python umi.py`)
-- ✅ Local pytest suite added (`pytest -q`)
-- ⏳ CI pipeline not configured yet
+## 📦 Project Structure
 
-## Getting Started
+```text
+.
+├── .github/
+│   └── workflows/
+│       ├── ci.yml
+│       └── pages.yml
+├── docs/
+│   ├── architecture.md
+│   ├── index.md
+│   └── _config.yml
+├── src/
+│   └── umi/
+│       ├── __init__.py
+│       ├── __main__.py
+│       └── cli.py
+├── tests/
+│   └── test_umi.py
+├── .gitignore
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+└── umi.py
+```
 
-The runtime stack is still being evaluated, but a minimal Python CLI bootstrap is available now.
+## 🚀 Quick Start
 
-Run:
+### Requirements
+
+- Python 3.10+
+
+### Run locally
 
 ```bash
 python umi.py
 ```
 
-Run tests:
+or:
 
 ```bash
-pytest -q
+PYTHONPATH=src python -m umi
 ```
 
-If you're joining as a new contributor:
+### Run tests
 
-1. Read [Project Structure](#project-structure).
-2. Read [Contributing](CONTRIBUTING.md).
-3. Read [Architecture Notes](docs/architecture.md).
-4. Propose or help choose the first implementation stack.
-
-## Project Structure
-
-```text
-.
-├── README.md
-├── CONTRIBUTING.md
-├── umi.py
-├── tests/
-│   └── test_umi.py
-└── docs/
-    └── architecture.md
+```bash
+PYTHONPATH=src pytest -q
 ```
 
-## Suggested Next Milestones
+## 📚 Documentation & GitHub Pages
 
-1. Choose a target stack (for example: TypeScript, Python, Go, or Rust).
-2. Scaffold an executable baseline (CLI, API, or web app).
-3. Add formatting, linting, and tests.
-4. Add CI checks for pull requests.
-5. Implement the first end-to-end vertical slice.
+This repository is configured to publish `docs/` with a GitHub Pages workflow.
 
-## Philosophy
+1. Push to GitHub.
+2. In repository settings, ensure **Pages** is set to **GitHub Actions** as source.
+3. The `pages.yml` workflow will deploy on pushes to `main` (and is runnable manually).
 
-- Keep changes small and reviewable.
-- Document decisions early.
-- Prefer simple defaults over premature optimization.
+## 🤝 Contributing
 
----
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening pull requests.
 
-If you'd like, open an issue proposing the initial stack and app shape so we can scaffold the first working version.
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).

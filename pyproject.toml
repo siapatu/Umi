@@ -1,0 +1,16 @@
+[project]
+name = "umi"
+version = "0.1.0"
+description = "Lightweight open-source CLI starter project"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Umi contributors"}]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

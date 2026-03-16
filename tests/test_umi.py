@@ -1,10 +1,16 @@
+from __future__ import annotations
+
+from pathlib import Path
 import subprocess
 import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+CLI_SCRIPT = ROOT / "umi.py"
 
 
 def test_cli_runs_successfully() -> None:
     result = subprocess.run(
-        [sys.executable, "umi.py"],
+        [sys.executable, str(CLI_SCRIPT)],
         check=False,
         capture_output=True,
         text=True,
@@ -16,7 +22,7 @@ def test_cli_runs_successfully() -> None:
 
 def test_cli_help_flag_displays_usage() -> None:
     result = subprocess.run(
-        [sys.executable, "umi.py", "--help"],
+        [sys.executable, str(CLI_SCRIPT), "--help"],
         check=False,
         capture_output=True,
         text=True,
@@ -29,7 +35,7 @@ def test_cli_help_flag_displays_usage() -> None:
 
 def test_cli_does_not_accept_abbreviated_flags() -> None:
     result = subprocess.run(
-        [sys.executable, "umi.py", "--hel"],
+        [sys.executable, str(CLI_SCRIPT), "--hel"],
         check=False,
         capture_output=True,
         text=True,
@@ -41,7 +47,7 @@ def test_cli_does_not_accept_abbreviated_flags() -> None:
 
 def test_cli_rejects_unknown_arguments() -> None:
     result = subprocess.run(
-        [sys.executable, "umi.py", "--unknown"],
+        [sys.executable, str(CLI_SCRIPT), "--unknown"],
         check=False,
         capture_output=True,
         text=True,
@@ -61,6 +67,7 @@ def test_main_returns_zero_for_help_without_raising() -> None:
         check=False,
         capture_output=True,
         text=True,
+        cwd=ROOT,
     )
 
     assert result.returncode == 0
@@ -77,6 +84,7 @@ def test_main_returns_two_for_unknown_args_without_raising() -> None:
         check=False,
         capture_output=True,
         text=True,
+        cwd=ROOT,
     )
 
     assert result.returncode == 2
@@ -84,10 +92,7 @@ def test_main_returns_two_for_unknown_args_without_raising() -> None:
 
 
 def test_main_handles_systemexit_with_none_code() -> None:
-    import pathlib
-    import sys
-
-    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+    sys.path.insert(0, str(ROOT))
     import umi
 
     class DummyParser:
@@ -112,6 +117,7 @@ def test_main_accepts_argv_with_program_name() -> None:
         check=False,
         capture_output=True,
         text=True,
+        cwd=ROOT,
     )
 
     assert result.returncode == 0
@@ -128,6 +134,7 @@ def test_main_rejects_unknown_args_when_program_name_is_present() -> None:
         check=False,
         capture_output=True,
         text=True,
+        cwd=ROOT,
     )
 
     assert result.returncode == 2
@@ -139,11 +146,12 @@ def test_main_accepts_argv_with_program_path() -> None:
         [
             sys.executable,
             "-c",
-            "import umi; raise SystemExit(umi.main(['/workspace/Umi/umi.py', '--help']))",
+            f"import umi; raise SystemExit(umi.main(['{CLI_SCRIPT}', '--help']))",
         ],
         check=False,
         capture_output=True,
         text=True,
+        cwd=ROOT,
     )
 
     assert result.returncode == 0
@@ -160,6 +168,7 @@ def test_main_accepts_windows_style_program_path() -> None:
         check=False,
         capture_output=True,
         text=True,
+        cwd=ROOT,
     )
 
     assert result.returncode == 0
@@ -176,6 +185,7 @@ def test_main_accepts_uppercase_windows_executable_name() -> None:
         check=False,
         capture_output=True,
         text=True,
+        cwd=ROOT,
     )
 
     assert result.returncode == 0
