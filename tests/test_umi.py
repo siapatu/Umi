@@ -164,3 +164,19 @@ def test_main_accepts_windows_style_program_path() -> None:
 
     assert result.returncode == 0
     assert "usage:" in result.stdout
+
+
+def test_main_accepts_uppercase_windows_executable_name() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            r"import umi; raise SystemExit(umi.main([r'C:\\repo\\UMI.EXE', '--help']))",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 0
+    assert "usage:" in result.stdout

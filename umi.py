@@ -23,8 +23,8 @@ def _normalize_argv(argv: Sequence[str] | None) -> list[str] | None:
 
     normalized = list(argv)
     if normalized:
-        executable = normalized[0].replace("\\", "/").rsplit("/", maxsplit=1)[-1]
-        if executable in {"umi", "umi.py"}:
+        executable = normalized[0].replace("\\", "/").rsplit("/", maxsplit=1)[-1].lower()
+        if executable in {"umi", "umi.py", "umi.pyw", "umi.exe", "umi.bat", "umi.cmd"}:
             return normalized[1:]
     return normalized
 
