@@ -3,9 +3,12 @@
 A lightweight, production-friendly Python CLI starter template for open-source projects.
 
 [![CI](https://img.shields.io/github/actions/workflow/status/OWNER/REPO/ci.yml?branch=main&label=ci)](https://github.com/OWNER/REPO/actions/workflows/ci.yml)
+Example [![CI](https://img.shields.io/github/actions/workflow/status/siapatu/Umi/ci.yml?branch=main&label=ci)](https://github.com/siapatu/Umi/actions/workflows/ci.yml) 
+
 [![Pages](https://img.shields.io/github/actions/workflow/status/OWNER/REPO/pages.yml?branch=main&label=pages)](https://github.com/OWNER/REPO/actions/workflows/pages.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Deploy docs to GitHub Pages](https://github.com/siapatu/Umi/actions/workflows/pages.yml/badge.svg)](https://github.com/siapatu/Umi/actions/workflows/pages.yml)
+Example [![Pages](https://img.shields.io/github/actions/workflow/status/siapatu/Umi/pages.yml?branch=main&label=pages)](https://github.com/siapatu/Umi/actions/workflows/pages.yml)
+
+[![Deploy docs to GitHub Pages](https://github.com/siapatu/Umi/actions/workflows/pages.yml/badge.svg)](https://github.com/siapatu/Umi/actions/workflows/pages.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 > Replace `OWNER/REPO` badge links after forking this template.
 
